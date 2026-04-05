@@ -93,19 +93,19 @@ int main(){
 
     mkfifo("pipe_db",0666);
 
-    // O_RDWR mantem o pipe aberto, evitando loop de EOF quando o cliente sai
+    
     int fd=open("pipe_db",O_RDWR);
 
     pthread_mutex_init(&mutex,NULL);
 
     while(true){
-        char* comando = new char[100]; // Aloca memoria para evitar data race
+        char* comando = new char[100]; 
         int bytesLidos = read(fd,comando,100);
         
         if(bytesLidos > 0){
             pthread_t thread;
             pthread_create(&thread,NULL,tarefa,comando);
-            pthread_detach(thread); // Permite processamento verdadeiramente paralelo
+            pthread_detach(thread); 
         } else {
             delete[] comando;
         }
