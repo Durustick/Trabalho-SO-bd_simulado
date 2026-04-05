@@ -84,7 +84,7 @@ void* tarefa(void* arg){
     arquivoLog.close();
     pthread_mutex_unlock(&mutex);
 
-    delete[] comando; // Libera a memoria apos o uso
+    delete[] comando; 
 
     pthread_exit(NULL);
 }
